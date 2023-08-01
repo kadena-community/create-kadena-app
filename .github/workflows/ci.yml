@@ -1,0 +1,36 @@
+name: CI (install, build, test)
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: ${{ matrix.os }} - Node.js v${{ matrix.NodeVersion }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        NodeVersion: [18]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.NodeVersion }}
+          cache: 'pnpm'
+
+      - run: pnpm install
+
+      - run: pnpm build
+
+      - run: pnpm test
