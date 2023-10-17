@@ -1,0 +1,13 @@
+version: 2
+updates:
+    - package-ecosystem: "npm"
+      directory: "/"
+      schedule:
+        interval: daily
+        time: "06:00"
+        timezone: "Europe/Amsterdam"
+      target-branch: main
+      groups:
+        dependencies:
+          patterns:
+            - "*"  # or a wildcard string that matches all dependencies
