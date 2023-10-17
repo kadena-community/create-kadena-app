@@ -1,6 +1,6 @@
 version: 2
 updates:
-    # Update Root Package.json
+    # Update root package
     - package-ecosystem: "npm"
       directory: "/"
       schedule:
@@ -11,8 +11,8 @@ updates:
       groups:
         dependencies:
           patterns:
-            - "*"  # or a wildcard string that matches all dependencies
-    # Update Angular Template
+            - "*"
+    # Update angular package
     - package-ecosystem: "npm"
       directory: "/templates/angular"
       schedule:
@@ -23,8 +23,8 @@ updates:
       groups:
         dependencies:
           patterns:
-            - "*"  # or a wildcard string that matches all dependencies
-    # Update vuejs Template
+            - "*"
+    # Update vuejs package
     - package-ecosystem: "npm"
       directory: "/templates/vuejs"
       schedule:
@@ -35,8 +35,8 @@ updates:
       groups:
         dependencies:
           patterns:
-            - "*"  # or a wildcard string that matches all depende
-    # Update nextjs Template
+            - "*"
+    # Update nextjs package
     - package-ecosystem: "npm"
       directory: "/templates/nextjs"
       schedule:
@@ -47,4 +47,4 @@ updates:
       groups:
         dependencies:
           patterns:
-            - "*"  # or a wildcard string that matches all depende
+            - "*"
