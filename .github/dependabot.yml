@@ -1,5 +1,6 @@
 version: 2
 updates:
+    # Update Root Package.json
     - package-ecosystem: "npm"
       directory: "/"
       schedule:
@@ -11,3 +12,39 @@ updates:
         dependencies:
           patterns:
             - "*"  # or a wildcard string that matches all dependencies
+    # Update Angular Template
+    - package-ecosystem: "npm"
+      directory: "/templates/angular"
+      schedule:
+        interval: daily
+        time: "06:00"
+        timezone: "Europe/Amsterdam"
+      target-branch: main
+      groups:
+        dependencies:
+          patterns:
+            - "*"  # or a wildcard string that matches all dependencies
+    # Update vuejs Template
+    - package-ecosystem: "npm"
+      directory: "/templates/vuejs"
+      schedule:
+        interval: daily
+        time: "06:00"
+        timezone: "Europe/Amsterdam"
+      target-branch: main
+      groups:
+        dependencies:
+          patterns:
+            - "*"  # or a wildcard string that matches all depende
+    # Update nextjs Template
+    - package-ecosystem: "npm"
+      directory: "/templates/vuejs"
+      schedule:
+        interval: daily
+        time: "06:00"
+        timezone: "Europe/Amsterdam"
+      target-branch: main
+      groups:
+        dependencies:
+          patterns:
+            - "*"  # or a wildcard string that matches all depende
