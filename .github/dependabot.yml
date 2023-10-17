@@ -9,7 +9,7 @@ updates:
         timezone: "Europe/Amsterdam"
       target-branch: main
       groups:
-        dependencies:
+        create-kadena-app:
           patterns:
             - "*"
     # Update angular package
@@ -21,7 +21,7 @@ updates:
         timezone: "Europe/Amsterdam"
       target-branch: main
       groups:
-        dependencies:
+        angular-template:
           patterns:
             - "*"
     # Update vuejs package
@@ -33,7 +33,7 @@ updates:
         timezone: "Europe/Amsterdam"
       target-branch: main
       groups:
-        dependencies:
+        vuejs-template:
           patterns:
             - "*"
     # Update nextjs package
@@ -45,6 +45,6 @@ updates:
         timezone: "Europe/Amsterdam"
       target-branch: main
       groups:
-        dependencies:
+        nextjs-template:
           patterns:
             - "*"
