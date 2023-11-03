@@ -5,13 +5,6 @@ import styles from '../styles/main.module.css';
 import writeMessage from '@/utils/writeMessage';
 import readMessage from '@/utils/readMessage';
 
-const NETWORK_ID = process.env.NEXT_PUBLIC_KADENA_NETWORK_ID;
-const CHAIN_ID = process.env.NEXT_PUBLIC_KADENA_CHAIN_ID;
-const HOST = process.env.NEXT_PUBLIC_KADENA_HOST;
-const API_HOST = `https://${HOST}/chainweb/0.0/${NETWORK_ID}/chain/${CHAIN_ID}/pact`;
-
-const accountKey = (account: string): string => account.split(':')[1];
-
 const Home: React.FC = (): JSX.Element => {
   const [account, setAccount] = useState<string>('');
   const [messageToWrite, setMessageToWrite] = useState<string>('');
