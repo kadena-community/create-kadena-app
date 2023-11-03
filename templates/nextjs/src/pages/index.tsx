@@ -1,15 +1,9 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { SpinnerRoundFilled } from 'spinners-react';
-import { Pact, signWithChainweaver } from '@kadena/client';
 import styles from '../styles/main.module.css';
-
-const NETWORK_ID = process.env.NEXT_PUBLIC_KADENA_NETWORK_ID;
-const CHAIN_ID = process.env.NEXT_PUBLIC_KADENA_CHAIN_ID;
-const HOST = process.env.NEXT_PUBLIC_KADENA_HOST;
-const API_HOST = `https://${HOST}/chainweb/0.0/${NETWORK_ID}/chain/${CHAIN_ID}/pact`;
-
-const accountKey = (account: string): string => account.split(':')[1];
+import writeMessage from '@/utils/writeMessage';
+import readMessage from '@/utils/readMessage';
 
 const Home: React.FC = (): JSX.Element => {
   const [account, setAccount] = useState<string>('');
@@ -29,63 +23,28 @@ const Home: React.FC = (): JSX.Element => {
     setMessageToWrite(event.target.value);
   };
 
-  const writeMessage = async (): Promise<void> => {
-    try {
-      const transactionBuilder = Pact.modules['free.cka-message-store']
-        ['write-message'](account, messageToWrite)
-        .addCap('coin.GAS', accountKey(account))
-        .addCap(
-          'free.cka-message-store.ACCOUNT-OWNER',
-          accountKey(account),
-          account,
-        )
-        .setMeta(
-          {
-            ttl: 28000,
-            gasLimit: 100000,
-            chainId: CHAIN_ID,
-            gasPrice: 0.000001,
-            sender: account,
-          },
-          NETWORK_ID,
-        );
-
-      setWriteInProgress(true);
-
-      await signWithChainweaver(transactionBuilder);
-
-      console.log(`Sending transaction: ${transactionBuilder.code}`);
-      const response = await transactionBuilder.send(API_HOST);
-
-      console.log('Send response: ', response);
-      const requestKey = response.requestKeys[0];
-
-      const pollResult = await transactionBuilder.pollUntil(API_HOST, {
-        onPoll: async (transaction, pollRequest): Promise<void> => {
-          console.log(`Polling ${requestKey}.\nStatus: ${transaction.status}`);
-          console.log(await pollRequest);
-        },
+  function handleWriteMessageClick() {
+    setWriteInProgress(true);
+    writeMessage({ account, messageToWrite })
+      .then(() => {
+        setWriteInProgress(false);
+        setMessageToWrite('');
+      })
+      .catch((e) => {
+        console.log(e);
+        setWriteInProgress(false);
       });
+  }
 
-      console.log('Polling Completed.');
-      console.log(pollResult);
-    } catch (e) {
-      console.log(e);
-    }
-    setWriteInProgress(false);
-  };
-
-  const readMessage = async (): Promise<void> => {
-    const transactionBuilder =
-      Pact.modules['free.cka-message-store']['read-message'](account);
-    const { result } = await transactionBuilder.local(API_HOST);
-
-    if (result.status === 'success') {
-      setMessageFromChain(result.data.toString());
-    } else {
-      console.log(result.error);
-    }
-  };
+  function handleReadMessageClick() {
+    readMessage({ account })
+      .then((message) => {
+        setMessageFromChain(message);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   return (
     <div>
@@ -132,7 +91,7 @@ const Home: React.FC = (): JSX.Element => {
               disabled={writeInProgress}
             ></textarea>
             <button
-              onClick={() => writeMessage()}
+              onClick={handleWriteMessageClick}
               disabled={
                 account === '' || messageToWrite === '' || writeInProgress
               }
@@ -152,7 +111,7 @@ const Home: React.FC = (): JSX.Element => {
               disabled
               value={messageFromChain}
             ></textarea>
-            <button onClick={() => readMessage()} disabled={account === ''}>
+            <button onClick={handleReadMessageClick} disabled={account === ''}>
               Read
             </button>
           </section>
