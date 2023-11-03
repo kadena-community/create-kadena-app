@@ -16,6 +16,7 @@
     "lib"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "tsc",
     "format": "prettier config src templates --write",
     "lint": "eslint ./src --ext .js,.ts --fix",
@@ -45,5 +46,9 @@
     "rimraf": "~5.0.1",
     "ts-node": "~10.8.2",
     "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=18.16.1",
+    "pnpm": ">=8.7.4"
   }
 }
