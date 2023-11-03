@@ -9,7 +9,7 @@ const packageJson: { version: string } = JSON.parse(
   readFileSync(join(__dirname, '../package.json'), 'utf8'),
 );
 
-projectGenerateCommand(program, packageJson.version, __dirname);
+projectGenerateCommand(program, packageJson.version, process.cwd());
 
 program
   .name('create-kadena-app')

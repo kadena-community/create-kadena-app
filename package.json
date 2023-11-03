@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "bin": {
-    "create-kadena-app": "lib/index.js"
+    "create-kadena-app": "./bin/index.js"
   },
   "files": [
     "dist",

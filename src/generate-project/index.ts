@@ -119,13 +119,17 @@ const generate =
 
     writeFileSync(
       targetPackageJsonPath,
-      JSON.stringify({
-        ...targetPackageJson,
-        ...{
-          name: args.name,
-          version,
+      JSON.stringify(
+        {
+          ...targetPackageJson,
+          ...{
+            name: args.name,
+            version,
+          },
         },
-      }),
+        null,
+        2,
+      ),
     );
 
     // Installing dependencies
