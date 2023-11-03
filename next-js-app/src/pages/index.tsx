@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { SpinnerRoundFilled } from 'spinners-react';
-import { Pact, createClient, isSignedTransaction, signWithChainweaver } from '@kadena/client';
 import styles from '../styles/main.module.css';
+import writeMessage from '@/utils/writeMessage';
+import readMessage from '@/utils/readMessage';
 
 const NETWORK_ID = process.env.NEXT_PUBLIC_KADENA_NETWORK_ID;
 const CHAIN_ID = process.env.NEXT_PUBLIC_KADENA_CHAIN_ID;
@@ -29,108 +30,28 @@ const Home: React.FC = (): JSX.Element => {
     setMessageToWrite(event.target.value);
   };
 
-  const writeMessage = async (): Promise<void> => {
-    try {
-      // const transactionBuilder = Pact.modules['free.cka-message-store']
-      //   ['write-message'](account, messageToWrite)
-      //   .addCap('coin.GAS', accountKey(account))
-      //   .addCap(
-      //     'free.cka-message-store.ACCOUNT-OWNER',
-      //     accountKey(account),
-      //     account,
-      //   )
-      //   .setMeta(
-      //     {
-      //       ttl: 28000,
-      //       gasLimit: 100000,
-      //       chainId: CHAIN_ID,
-      //       gasPrice: 0.000001,
-      //       sender: account,
-      //     },
-      //     NETWORK_ID,
-      //   );
-
-      const transactionBuilder = Pact.builder
-        .execution(
-          Pact.modules['free.cka-message-store']
-            ['write-message'](account, messageToWrite)
-        )
-        .addSigner(accountKey(account), (withCapability) => [
-          withCapability('coin.GAS'),
-          withCapability(
-            'free.cka-message-store.ACCOUNT-OWNER',
-            account,
-          ),
-        ])
-        .setMeta({ chainId: CHAIN_ID, senderAccount: account })
-        .setNetworkId(NETWORK_ID)
-        .createTransaction();
-
-      setWriteInProgress(true);
-
-      const signedTx = await signWithChainweaver(transactionBuilder);
-
-      // console.log(`Sending transaction: ${transactionBuilder.code}`);
-      // const response = await transactionBuilder.send(API_HOST);
-      // console.log('Send response: ', response);
-      // const requestKey = response.requestKeys[0];
-      const client = createClient(API_HOST);
-
-      if (isSignedTransaction(signedTx)) {
-        const transactionDescriptor = await client.submit(signedTx);
-        const response = await client.listen(transactionDescriptor);
-        console.log({ response });
-        if(response.result.status === 'success') {
-          setMessageToWrite('');
-        }
-      } else {
-        console.log('Failed to sign transaction');
-      }
-
-
-      // const pollResult = await transactionBuilder.pollUntil(API_HOST, {
-      //   onPoll: async (transaction, pollRequest): Promise<void> => {
-      //     console.log(`Polling ${requestKey}.\nStatus: ${transaction.status}`);
-      //     console.log(await pollRequest);
-      //   },
-      // });
-
-      console.log('Polling Completed.');
-    } catch (e) {
-      console.log(e);
-    }
-    setWriteInProgress(false);
-  };
-
-  const readMessage = async (): Promise<void> => {
-
-    try {
-    // const transactionBuilder =
-    //   Pact.modules['free.cka-message-store']['read-message'](account);
-    const transactionBuilder = Pact.builder
-      .execution(Pact.modules['free.cka-message-store']['read-message'](account))
-      .setMeta({ chainId: CHAIN_ID })
-      .setNetworkId(NETWORK_ID)
-      .createTransaction();
-
-    const staticClient = createClient(API_HOST);
-    console.log(staticClient);
-    // const { result } = await transactionBuilder.local(API_HOST);
-
-      const res = await staticClient.local(transactionBuilder, {
-        preflight: false,
-        signatureVerification: false,
+  function handleWriteMessageClick() {
+    setWriteInProgress(true);
+    writeMessage({ account, messageToWrite })
+      .then(() => {
+        setWriteInProgress(false);
+        setMessageToWrite('');
+      })
+      .catch((e) => {
+        console.log(e);
+        setWriteInProgress(false);
       });
-      console.log(res);
-      if(res.result.status === 'success') {
-        setMessageFromChain(res.result.data);
-      } else {
-        console.log(res.result);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  }
+
+  function handleReadMessageClick() {
+    readMessage({ account })
+      .then((message) => {
+        setMessageFromChain(message);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   return (
     <div>
@@ -177,7 +98,7 @@ const Home: React.FC = (): JSX.Element => {
               disabled={writeInProgress}
             ></textarea>
             <button
-              onClick={() => writeMessage()}
+              onClick={handleWriteMessageClick}
               disabled={
                 account === '' || messageToWrite === '' || writeInProgress
               }
@@ -197,7 +118,7 @@ const Home: React.FC = (): JSX.Element => {
               disabled
               value={messageFromChain}
             ></textarea>
-            <button onClick={() => readMessage()} disabled={account === ''}>
+            <button onClick={handleReadMessageClick} disabled={account === ''}>
               Read
             </button>
           </section>
