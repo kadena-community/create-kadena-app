@@ -15,6 +15,13 @@
     "dist",
     "lib"
   ],
+  "contributors": [{
+    "name": "Jermaine Jong",
+    "email": "jermaine@kadena.io"
+  }, {
+    "name": "Mohamed Ismail",
+    "email": "mohamed@kadena.io"
+  }],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "tsc",
