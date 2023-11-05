@@ -1,12 +1,12 @@
-import { ICommandResult, Pact, createClient } from '@kadena/client';
-import { CHAIN_ID, NETWORK_ID, API_HOST } from './consts';
+import { Pact, createClient } from '@kadena/client';
+import { API_HOST, CHAIN_ID, NETWORK_ID } from './consts';
 
-export default async function readMessage({
-  account,
-}): Promise<string> {
+export default async function readMessage({ account }): Promise<string> {
   try {
     const transactionBuilder = Pact.builder
-      .execution(Pact.modules['free.cka-message-store']['read-message'](account))
+      .execution(
+        Pact.modules['free.cka-message-store']['read-message'](account),
+      )
       .setMeta({ chainId: CHAIN_ID })
       .setNetworkId(NETWORK_ID)
       .createTransaction();
@@ -25,4 +25,4 @@ export default async function readMessage({
   } catch (e) {
     throw new Error(e);
   }
-};
+}

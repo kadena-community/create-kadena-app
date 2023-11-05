@@ -1,9 +1,9 @@
+import readMessage from '@/utils/readMessage';
+import writeMessage from '@/utils/writeMessage';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { SpinnerRoundFilled } from 'spinners-react';
 import styles from '../styles/main.module.css';
-import writeMessage from '@/utils/writeMessage';
-import readMessage from '@/utils/readMessage';
 
 const Home: React.FC = (): JSX.Element => {
   const [account, setAccount] = useState<string>('');
