@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/vue';
 import App from '../App.vue';
 
-describe('Home layout', () => {
+describe('App page', () => {
   it('should render title', () => {
     render(App);
 

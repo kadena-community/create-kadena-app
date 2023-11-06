@@ -1,71 +1,7 @@
 <script lang="ts">
 import { HalfCircleSpinner } from 'epic-spinners';
-import { Pact, signWithChainweaver } from '@kadena/client';
-
-const { VITE_KADENA_NETWORK_ID, VITE_KADENA_CHAIN_ID, VITE_KADENA_HOST } =
-  import.meta.env;
-const API_HOST = `https://${VITE_KADENA_HOST}/chainweb/0.0/${VITE_KADENA_NETWORK_ID}/chain/${VITE_KADENA_CHAIN_ID}/pact`;
-
-const accountKey = (account: string): string => account.split(':')[1];
-
-const readMessage = async (account: string): Promise<string> => {
-  const transactionBuilder =
-    Pact.modules['free.cka-message-store']['read-message'](account);
-  const { result } = await transactionBuilder.local(API_HOST);
-
-  if (result.status === 'success') {
-    return result.data.toString();
-  } else {
-    console.log(result.error);
-    return '';
-  }
-};
-
-const writeMessage = async (
-  account: string,
-  messageToWrite: string,
-): Promise<void> => {
-  try {
-    const transactionBuilder = Pact.modules['free.cka-message-store']
-      ['write-message'](account, messageToWrite)
-      .addCap('coin.GAS', accountKey(account))
-      .addCap(
-        'free.cka-message-store.ACCOUNT-OWNER',
-        accountKey(account),
-        account,
-      )
-      .setMeta(
-        {
-          ttl: 28000,
-          gasLimit: 10000,
-          chainId: VITE_KADENA_CHAIN_ID,
-          gasPrice: 0.000001,
-          sender: account,
-        },
-        VITE_KADENA_NETWORK_ID,
-      );
-
-    await signWithChainweaver(transactionBuilder);
-
-    console.log(`Sending transaction: ${transactionBuilder.code}`);
-    const response = await transactionBuilder.send(API_HOST);
-
-    console.log('Send response: ', response);
-    const requestKey = response.requestKeys[0];
-
-    const pollResult = await transactionBuilder.pollUntil(API_HOST, {
-      onPoll: async (transaction, pollRequest): Promise<void> => {
-        console.log(`Polling ${requestKey}.\nStatus: ${transaction.status}`);
-        console.log(await pollRequest);
-      },
-    });
-
-    console.log('Polling Completed.');
-    console.log(pollResult);
-  } catch (e) {
-    console.log(e);
-  }
-};
+import writeMessage from './utils/writeMessage';
+import readMessage from './utils/readMessage';
 
 export default {
   data: () => ({
@@ -77,12 +13,16 @@ export default {
 
   methods: {
     async readMessage() {
-      this.messageFromChain = await readMessage(this.account);
+      this.messageFromChain = await readMessage({ account: this.account });
     },
     async writeMessage() {
       this.writeInProgress = true;
-      await writeMessage(this.account, this.messageToWrite);
+      await writeMessage({
+        account: this.account,
+        messageToWrite: this.messageToWrite,
+      });
       this.writeInProgress = false;
+      this.messageToWrite;
     },
   },
   components: {
