@@ -1,7 +1,13 @@
 import { Pact, createClient } from '@kadena/client';
 import { API_HOST, CHAIN_ID, NETWORK_ID } from './consts';
 
-export default async function readMessage({ account }): Promise<string> {
+interface ReadMessageParams {
+  account: string;
+}
+
+export default async function readMessage({
+  account,
+}: ReadMessageParams): Promise<string> {
   try {
     const transactionBuilder = Pact.builder
       .execution(

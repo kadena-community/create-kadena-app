@@ -5,15 +5,19 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+# Testing
+coverage
+test-results
+test-coverage
 
 # next.js
 /.next/
 /out/
 
-# production
-/build
+# Build
+build
+dist
+dist-ssr
 
 # misc
 .DS_Store
@@ -24,7 +28,19 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
+*.local
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
