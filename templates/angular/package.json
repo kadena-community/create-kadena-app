@@ -1,6 +1,7 @@
 {
   "name": "angular",
-  "version": "0.1.0",
+  "private": true,
+  "version": "0.0.0",
   "description": "Angular starter project with @kadena/client integration",
   "repository": {
     "type": "git",
