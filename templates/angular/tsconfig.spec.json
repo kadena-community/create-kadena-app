@@ -5,5 +5,8 @@
     "outDir": "./out-tsc/spec",
     "types": ["jasmine", "node", ".kadena/pactjs-generated"]
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
 }
