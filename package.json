@@ -36,6 +36,7 @@
     "test": "rimraf test-* && heft test && cross-env NG_CLI_ANALYTICS=false ./scripts/generate-test.sh"
   },
   "dependencies": {
+    "@changesets/cli": "^2.26.2",
     "commander": "^9.3.0",
     "cross-fetch": "~3.1.5",
     "cross-spawn": "~7.0.3",
