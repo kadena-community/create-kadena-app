@@ -1,6 +1,6 @@
 {
   "name": "@kadena/create-kadena-app",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "CLI tool to create a starter project with @kadena/client integration",
   "repository": {
     "type": "git",
@@ -15,16 +15,21 @@
     "dist",
     "lib"
   ],
-  "contributors": [{
-    "name": "Jermaine Jong",
-    "email": "jermaine@kadena.io"
-  }, {
-    "name": "Mohamed Ismail",
-    "email": "mohamed@kadena.io"
-  }],
+  "contributors": [
+    {
+      "name": "Jermaine Jong",
+      "email": "jermaine@kadena.io"
+    },
+    {
+      "name": "Mohamed Ismail",
+      "email": "mohamed@kadena.io"
+    }
+  ],
   "scripts": {
+    "cleanup": "rimraf dist lib",
     "preinstall": "npx only-allow pnpm",
-    "build": "tsc",
+    "copy": "node ./src/scripts/copy.mjs",
+    "build": "pnpm run cleanup && tsc && pnpm run copy",
     "format": "prettier config src templates --write",
     "lint": "eslint ./src --ext .js,.ts --fix",
     "start": "ts-node --transpile-only src/index.ts",
@@ -50,6 +55,9 @@
     "cross-env": "~7.0.3",
     "eslint": "^8.45.0",
     "prettier": "~3.0.0",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "prettier-plugin-packagejson": "^2.4.6",
+    "recursive-copy": "^2.0.14",
     "rimraf": "~5.0.1",
     "ts-node": "~10.8.2",
     "typescript": "^5.1.6"
