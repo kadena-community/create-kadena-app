@@ -12,7 +12,9 @@ const copyFolder = async (src, dest) => {
       });
     }
 
-    const results = await copy(src, dest);
+    const results = await copy(src, dest, {
+      dot: true,
+    });
     console.log('Copy completed!');
   } catch (error) {
     console.error(`Copy failed: ${error}`);
