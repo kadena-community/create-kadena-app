@@ -28,9 +28,7 @@
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
   width: 100%;
   max-width: 1000px;
 }
@@ -52,4 +50,16 @@
 
 .spinner-container {
   padding: 5px;
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.spinner-container ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #ed098f;
+}
+
+.spinner-container .mat-mdc-progress-spinner {
+  stroke: #ed098f;
 }
