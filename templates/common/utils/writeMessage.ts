@@ -1,10 +1,5 @@
-import {
-  Pact,
-  createClient,
-  isSignedTransaction,
-  signWithChainweaver,
-} from '@kadena/client';
 import type { ICommandResult } from '@kadena/client';
+import { Pact, createClient, isSignedTransaction, signWithChainweaver } from '@kadena/client';
 
 import { API_HOST, CHAIN_ID, NETWORK_ID } from './consts';
 import getAccountKey from './getAccountKey';
@@ -14,18 +9,12 @@ interface IWriteMessage {
   messageToWrite: string;
 }
 
-export default async function writeMessage({
-  account,
-  messageToWrite,
-}: IWriteMessage): Promise<ICommandResult> {
+export default async function writeMessage({ account, messageToWrite }: IWriteMessage): Promise<ICommandResult> {
   try {
     const transactionBuilder = Pact.builder
       .execution(
         // @ts-ignore
-        Pact.modules['free.cka-message-store']['write-message'](
-          account,
-          messageToWrite,
-        ),
+        Pact.modules['free.cka-message-store']['write-message'](account, messageToWrite),
       )
       .addSigner(getAccountKey(account), (withCapability) => [
         withCapability('coin.GAS'),

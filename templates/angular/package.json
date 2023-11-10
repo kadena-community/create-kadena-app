@@ -1,7 +1,7 @@
 {
   "name": "angular",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "description": "Angular starter project with @kadena/client integration",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "license": "ISC",
   "scripts": {
     "build": "ng build",
-    "format": "prettier --write src/",
+    "format": "prettier --write .",
     "ng": "ng",
     "pactjs:generate:contracts": "pactjs contract-generate --file ./pact/message-store.pact; pactjs contract-generate --file ./pact/root/coin-v5.pact",
     "start": "ng serve",
@@ -55,3 +55,4 @@
     "typescript": "~5.2.2"
   }
 }
+
