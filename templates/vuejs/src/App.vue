@@ -38,9 +38,8 @@ export default {
         <h1 class="title">Welcome to <span>Kadena!</span></h1>
       </header>
       <p>
-        This is the Kadena starter template using vuejs to help you get started
-        on your blockchain development. Use the form below to interact with the
-        Kadena blockchain using <code>@kadena/client</code> and edit
+        This is the Kadena starter template using vuejs to help you get started on your blockchain development. Use the
+        form below to interact with the Kadena blockchain using <code>@kadena/client</code> and edit
         <code>src/App.vue</code> to get started.
       </p>
     </div>
@@ -48,49 +47,24 @@ export default {
       <h3 class="cardTitle">Interact with the blockchain</h3>
       <section class="cardSection">
         <label for="account" class="fieldLabel">My Account</label>
-        <input
-          id="account"
-          v-model="account"
-          placeholder="Please enter a valid k:account"
-        />
+        <input id="account" v-model="account" placeholder="Please enter a valid k:account" />
       </section>
       <section class="cardSection">
         <label for="write-message" class="fieldLabel">Write Message</label>
-        <textarea
-          id="write-message"
-          v-model="messageToWrite"
-          :disabled="writeInProgress || !account"
-        ></textarea>
-        <button
-          @click="writeMessage"
-          :disabled="!messageToWrite || writeInProgress"
-        >
-          Write
-        </button>
-        <half-circle-spinner
-          :animation-duration="1000"
-          :size="30"
-          color="#ff1d5e"
-          v-show="writeInProgress"
-        />
+        <textarea id="write-message" v-model="messageToWrite" :disabled="writeInProgress || !account"></textarea>
+        <button @click="writeMessage" :disabled="!messageToWrite || writeInProgress">Write</button>
+        <half-circle-spinner :animation-duration="1000" :size="30" color="#ff1d5e" v-show="writeInProgress" />
       </section>
       <section class="cardSection">
         <label for="read-message" class="fieldLabel">Read Message</label>
-        <textarea
-          id="read-message"
-          disabled
-          v-model="messageFromChain"
-        ></textarea>
+        <textarea id="read-message" disabled v-model="messageFromChain"></textarea>
         <button @click="readMessage" :disabled="!account">Read</button>
       </section>
     </div>
     <div class="card">
       <h3 class="cardTitle">Resources</h3>
-      <a href="https://docs.kadena.io/"
-        >Find in-depth information about Kadena. &rarr;</a
-      >
-      <a
-        href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact"
+      <a href="https://docs.kadena.io/">Find in-depth information about Kadena. &rarr;</a>
+      <a href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact"
         >The smart contract powering this page. &rarr;</a
       >
     </div>
@@ -116,9 +90,7 @@ export default {
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
   width: 100%;
   max-width: 1000px;
 }

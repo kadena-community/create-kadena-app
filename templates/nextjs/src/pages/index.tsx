@@ -11,15 +11,11 @@ const Home: React.FC = (): JSX.Element => {
   const [messageFromChain, setMessageFromChain] = useState<string>('');
   const [writeInProgress, setWriteInProgress] = useState<boolean>(false);
 
-  const handleAccountInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ): void => {
+  const handleAccountInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAccount(event.target.value);
   };
 
-  const handleWriteMessageInputChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ): void => {
+  const handleWriteMessageInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setMessageToWrite(event.target.value);
   };
 
@@ -60,10 +56,8 @@ const Home: React.FC = (): JSX.Element => {
             </h1>
           </div>
           <p>
-            This is the Kadena starter template using nextjs to help you get
-            started on your blockchain development. Use the form below to
-            interact with the Kadena blockchain using{' '}
-            <code>@kadena/client</code> and edit{' '}
+            This is the Kadena starter template using nextjs to help you get started on your blockchain development. Use
+            the form below to interact with the Kadena blockchain using <code>@kadena/client</code> and edit{' '}
             <code>src/pages/index.tsx</code> to get started.
           </p>
         </div>
@@ -92,25 +86,17 @@ const Home: React.FC = (): JSX.Element => {
             ></textarea>
             <button
               onClick={handleWriteMessageClick}
-              disabled={
-                account === '' || messageToWrite === '' || writeInProgress
-              }
+              disabled={account === '' || messageToWrite === '' || writeInProgress}
             >
               Write
             </button>
-            {writeInProgress && (
-              <SpinnerRoundFilled size={30} color="#ed098f" />
-            )}
+            {writeInProgress && <SpinnerRoundFilled size={30} color="#ed098f" />}
           </section>
           <section className={styles.cardSection}>
             <label htmlFor="read-message" className={styles.fieldLabel}>
               Read Message
             </label>
-            <textarea
-              id="read-message"
-              disabled
-              value={messageFromChain}
-            ></textarea>
+            <textarea id="read-message" disabled value={messageFromChain}></textarea>
             <button onClick={handleReadMessageClick} disabled={account === ''}>
               Read
             </button>
@@ -118,9 +104,7 @@ const Home: React.FC = (): JSX.Element => {
         </div>
         <div className={styles.card}>
           <h3 className={styles.cardTitle}>Resources</h3>
-          <a href="https://docs.kadena.io/">
-            Find in-depth information about Kadena. &rarr;
-          </a>
+          <a href="https://docs.kadena.io/">Find in-depth information about Kadena. &rarr;</a>
           <a href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact">
             The smart contract powering this page. &rarr;
           </a>
