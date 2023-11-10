@@ -37,7 +37,7 @@ const isValidProjectName = (name: string): boolean => {
 };
 
 const copyFolderSync = (from: string, to: string): void => {
-  mkdirSync(to);
+  if (!existsSync(to)) mkdirSync(to);
   readdirSync(from).forEach((element) => {
     if (COPY_IGNORE_LIST.includes(element)) {
       return;
@@ -108,6 +108,12 @@ const generate =
     copyFileSync(
       join(executionPath, 'templates/README.md'),
       join(targetDirectory, 'README.md'),
+    );
+
+    console.log('Copying common client utils code ...');
+    copyFolderSync(
+      join(templateSourceDirectory, '../common/utils'),
+      join(targetDirectory, 'src/utils'),
     );
 
     // Update package.json
