@@ -1,10 +1,10 @@
 import {
-  ICommandResult,
   Pact,
   createClient,
   isSignedTransaction,
   signWithChainweaver,
 } from '@kadena/client';
+import type { ICommandResult } from '@kadena/client';
 
 import { API_HOST, CHAIN_ID, NETWORK_ID } from './consts';
 import getAccountKey from './getAccountKey';
