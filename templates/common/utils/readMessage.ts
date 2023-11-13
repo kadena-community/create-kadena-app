@@ -5,7 +5,9 @@ interface ReadMessageParams {
   account: string;
 }
 
-export default async function readMessage({ account }: ReadMessageParams): Promise<string> {
+export default async function readMessage({
+  account,
+}: ReadMessageParams): Promise<string> {
   try {
     const transactionBuilder = Pact.builder
       .execution(
