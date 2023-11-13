@@ -22,21 +22,27 @@ describe('AppComponent', () => {
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
       const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('h1').textContent).toContain('Welcome to Kadena!');
+      expect(compiled.querySelector('h1').textContent).toContain(
+        'Welcome to Kadena!',
+      );
     }));
 
     it('should render blockchain interaction section', () => {
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
       const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelectorAll('h3')[0].textContent).toContain('Interact with the blockchain');
+      expect(compiled.querySelectorAll('h3')[0].textContent).toContain(
+        'Interact with the blockchain',
+      );
     });
 
     it('should render resources section', () => {
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
       const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelectorAll('h3')[1].textContent).toContain('Resources');
+      expect(compiled.querySelectorAll('h3')[1].textContent).toContain(
+        'Resources',
+      );
     });
   });
 

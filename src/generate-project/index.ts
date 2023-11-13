@@ -1,7 +1,15 @@
 import chalk from 'chalk';
 import type { Command } from 'commander';
 import spawn from 'cross-spawn';
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  existsSync,
+  lstatSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs';
 import { join } from 'path';
 
 const log = console.log;
@@ -13,9 +21,18 @@ interface IGenerateProjectOptions {
   template: ProjectTemplate;
 }
 
-const SUPPORTED_PROJECT_TEMPLATES: Array<ProjectTemplate> = ['nextjs', 'vuejs', 'angular'];
+const SUPPORTED_PROJECT_TEMPLATES: Array<ProjectTemplate> = [
+  'nextjs',
+  'vuejs',
+  'angular',
+];
 
-const COPY_IGNORE_LIST: Array<string> = ['.next', 'node_modules', 'package-lock.json', '.pact-history'];
+const COPY_IGNORE_LIST: Array<string> = [
+  '.next',
+  'node_modules',
+  'package-lock.json',
+  '.pact-history',
+];
 
 const isValidProjectName = (name: string): boolean => {
   const pattern = /^(?!\.)([a-zA-Z0-9._-])+$/;
@@ -37,23 +54,42 @@ const copyFolderSync = (from: string, to: string): void => {
   });
 };
 
-const executeCommand = (command: string, args: Array<string>, options = {}): void => {
+const executeCommand = (
+  command: string,
+  args: Array<string>,
+  options = {},
+): void => {
   const { status } = spawn.sync(command, args, {
     stdio: 'inherit',
     ...options,
   });
 
   if (status !== 0) {
-    throw new Error(`${command} ${args.join(' ')} failed with exit code ${status}. Please check your console.`);
+    throw new Error(
+      `${command} ${args.join(
+        ' ',
+      )} failed with exit code ${status}. Please check your console.`,
+    );
   }
 };
 
 const generate =
-  (program: Command, version: string, executionPath: string): ((args: IGenerateProjectOptions) => void) =>
+  (
+    program: Command,
+    version: string,
+    executionPath: string,
+  ): ((args: IGenerateProjectOptions) => void) =>
   (args: IGenerateProjectOptions) => {
-    log(chalk.blue(`Generating @kadena/client integrated starter project with ${args.template} template`));
+    log(
+      chalk.blue(
+        `Generating @kadena/client integrated starter project with ${args.template} template`,
+      ),
+    );
 
-    const templateSourceDirectory: string = join(executionPath, `templates/${args.template}`);
+    const templateSourceDirectory: string = join(
+      executionPath,
+      `templates/${args.template}`,
+    );
 
     const pactSourceDirectory: string = join(executionPath, 'pact');
 
@@ -75,17 +111,25 @@ const generate =
 
     // Copy README.MD to target directory
     log(chalk.blue('Copying generic documentation ...'));
-    copyFileSync(join(executionPath, 'templates/README.md'), join(targetDirectory, 'README.md'));
+    copyFileSync(
+      join(executionPath, 'templates/README.md'),
+      join(targetDirectory, 'README.md'),
+    );
     log(chalk.green('Documentation copied successfully!'));
 
     log(chalk.blue('Copying common client utils code ...'));
-    copyFolderSync(join(templateSourceDirectory, '../common/utils'), join(targetDirectory, 'src/utils'));
+    copyFolderSync(
+      join(templateSourceDirectory, '../common/utils'),
+      join(targetDirectory, 'src/utils'),
+    );
     log(chalk.green('Common client utils copied successfully!'));
 
     // Update package.json
     log(chalk.blue('Updating and formatting package.json ...'));
     const targetPackageJsonPath: string = join(targetDirectory, 'package.json');
-    const targetPackageJson = JSON.parse(readFileSync(targetPackageJsonPath, 'utf8'));
+    const targetPackageJson = JSON.parse(
+      readFileSync(targetPackageJsonPath, 'utf8'),
+    );
 
     writeFileSync(
       targetPackageJsonPath,
@@ -122,7 +166,11 @@ const generate =
     log(chalk.green.bold(`Project created successfully!`));
   };
 
-export function projectGenerateCommand(program: Command, version: string, executionPath: string): void {
+export function projectGenerateCommand(
+  program: Command,
+  version: string,
+  executionPath: string,
+): void {
   program
     .command('generate-project')
     .description('Generate starter project')
