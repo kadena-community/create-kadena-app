@@ -23,27 +23,25 @@ const Home: React.FC = (): JSX.Element => {
     setMessageToWrite(event.target.value);
   };
 
-  function handleWriteMessageClick() {
+  async function handleWriteMessageClick() {
     setWriteInProgress(true);
-    writeMessage({ account, messageToWrite })
-      .then(() => {
-        setWriteInProgress(false);
-        setMessageToWrite('');
-      })
-      .catch((e) => {
-        console.log(e);
-        setWriteInProgress(false);
-      });
+    try {
+      await writeMessage({ account, messageToWrite });
+      setMessageToWrite('');
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setWriteInProgress(false);
+    }
   }
 
-  function handleReadMessageClick() {
-    readMessage({ account })
-      .then((message) => {
-        setMessageFromChain(message);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  async function handleReadMessageClick() {
+    try {
+      const message = await readMessage({ account });
+      setMessageFromChain(message);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
