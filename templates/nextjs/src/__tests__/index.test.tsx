@@ -6,14 +6,14 @@ describe('Home layout', () => {
     render(<Home />);
 
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading.textContent).toBe('Welcome to Kadena!');
+    expect(heading.textContent).toBe('Start Interacting with the Kadena Blockchain');
   });
 
   it('should render blockchain interaction section', () => {
     render(<Home />);
 
-    const heading = screen.queryByText('Interact with the blockchain', {
-      selector: 'h3',
+    const heading = screen.queryByText('Write to the blockchain', {
+      selector: 'h4',
     });
     expect(heading).toBeInTheDocument();
   });
@@ -21,7 +21,7 @@ describe('Home layout', () => {
   it('should render resources section', () => {
     render(<Home />);
 
-    const heading = screen.queryByText('Resources', { selector: 'h3' });
+    const heading = screen.queryByText('Resources', { selector: 'h4' });
     expect(heading).toBeInTheDocument();
   });
 });
