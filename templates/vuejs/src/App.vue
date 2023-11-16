@@ -140,9 +140,9 @@ export default {
 .title {
   font-size: 40px;
   line-height: 48px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
-  max-width: 460px;
+  max-width: 475px;
   margin: 0 auto;
 }
 
@@ -150,7 +150,7 @@ export default {
   text-align: center;
   font-size: 22px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 1.5;
 }
 
@@ -193,7 +193,7 @@ export default {
   color: #000;
   font-size: 24px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 40px;
 }
 
