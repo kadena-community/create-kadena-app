@@ -35,10 +35,12 @@ export default {
   <main class="grid">
     <section class="headerWrapper">
       <div class="header">
-        <img src="../public/assets/k-community-icon.png" alt="Kadena Logo" class="logo" />
-        <h1 class="title">
-          Start Interacting with the Kadena Blockchain
-        </h1>
+        <img
+          src="../public/assets/k-community-icon.png"
+          alt="Kadena Logo"
+          class="logo"
+        />
+        <h1 class="title">Start Interacting with the Kadena Blockchain</h1>
         <p class="note">
           This is the Kadena starter template using <strong>Vue JS</strong>
           to help you get started on your blockchain development.
@@ -56,16 +58,34 @@ export default {
           <h4 class="cardTitle">Write to the blockchain</h4>
           <fieldset class="fieldset">
             <label for="account" class="fieldLabel">My Account</label>
-            <input id="account" v-model="account" placeholder="Please enter a valid k:account" class="input codeFont" />
+            <input
+              id="account"
+              v-model="account"
+              placeholder="Please enter a valid k:account"
+              class="input codeFont"
+            />
           </fieldset>
           <fieldset class="fieldset">
             <label for="write-message" class="fieldLabel">Write Message</label>
-            <textarea id="write-message" v-model="messageToWrite" :disabled="writeInProgress || !account"
-              class="input"></textarea>
+            <textarea
+              id="write-message"
+              v-model="messageToWrite"
+              :disabled="writeInProgress || !account"
+              class="input"
+            ></textarea>
           </fieldset>
           <div class="buttonWrapper">
-            <half-circle-spinner :animation-duration="1000" :size="30" color="#ff1d5e" v-show="writeInProgress" />
-            <button @click="writeMessage" :disabled="!messageToWrite || writeInProgress" class="button">
+            <half-circle-spinner
+              :animation-duration="1000"
+              :size="30"
+              color="#ff1d5e"
+              v-show="writeInProgress"
+            />
+            <button
+              @click="writeMessage"
+              :disabled="!messageToWrite || writeInProgress"
+              class="button"
+            >
               Write
             </button>
           </div>
@@ -74,7 +94,12 @@ export default {
           <h4 class="cardTitle">Read from the blockchain</h4>
           <fieldset class="fieldset">
             <label for="read-message" class="fieldLabel">Read Message</label>
-            <textarea id="read-message" disabled v-model="messageFromChain" class="input"></textarea>
+            <textarea
+              id="read-message"
+              disabled
+              v-model="messageFromChain"
+              class="input"
+            ></textarea>
           </fieldset>
           <div class="buttonWrapper">
             <button @click="readMessage" :disabled="!account">Read</button>
@@ -82,16 +107,19 @@ export default {
         </div>
       </div>
       <div class="helperSection">
-        <div class="card">
+        <div class="card noBackground">
           <h4 class="cardTitle">Resources</h4>
           <ul class="list">
             <li>
-              <a href="https://docs.kadena.io/" class="link">Find in-depth information about Kadena. &rarr;</a>
+              <a href="https://docs.kadena.io/" class="link"
+                >Find in-depth information about Kadena. &rarr;</a
+              >
             </li>
             <li>
-              <a class="link"
-                href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact">The
-                smart contract powering this page. &rarr;
+              <a
+                class="link"
+                href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact"
+                >The smart contract powering this page. &rarr;
               </a>
             </li>
           </ul>
@@ -219,17 +247,8 @@ export default {
 }
 
 .input {
-  font-family: 'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    'Roboto',
-    'Oxygen',
-    'Ubuntu',
-    'Cantarell',
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   border: 0;
   outline: 0;

@@ -69,10 +69,8 @@ const Home: React.FC = (): JSX.Element => {
             </p>
             <p className={styles.note}>
               Use the form below to interact with the Kadena blockchain using{' '}
-              <code>@kadena/client</code>{' '}
-              and edit{' '}
-              <code>src/pages/index.tsx</code>{' '}
-              to get started.
+              <code>@kadena/client</code> and edit{' '}
+              <code>src/pages/index.tsx</code> to get started.
             </p>
           </div>
         </section>

@@ -2,10 +2,12 @@
   <main class="grid">
     <section class="headerWrapper">
       <div class="header">
-        <img src="../assets/k-community-icon.png" alt="Kadena Logo" class="logo" />
-        <h1 class="title">
-          Start Interacting with the Kadena Blockchain
-        </h1>
+        <img
+          src="../assets/k-community-icon.png"
+          alt="Kadena Logo"
+          class="logo"
+        />
+        <h1 class="title">Start Interacting with the Kadena Blockchain</h1>
         <p class="note">
           This is the Kadena starter template using <strong>Angular</strong>
           to help you get started on your blockchain development.
@@ -23,7 +25,12 @@
           <h4 class="cardTitle">Write to the blockchain</h4>
           <fieldset class="fieldset">
             <label for="account" class="fieldLabel">My Account</label>
-            <input id="account" [(ngModel)]="account" placeholder="Please enter a valid k:account" class="input codeFont" />
+            <input
+              id="account"
+              [(ngModel)]="account"
+              placeholder="Please enter a valid k:account"
+              class="input codeFont"
+            />
           </fieldset>
           <fieldset class="fieldset">
             <label for="messageToWrite" class="fieldLabel">Write Message</label>
@@ -52,7 +59,9 @@
           <h4 class="cardTitle">Read from the blockchain</h4>
           <fieldset class="fieldset">
             <label for="messageToRead" class="fieldLabel">Read Message</label>
-            <textarea id="messageToRead" disabled class="input">{{ messageFromChain }}</textarea>
+            <textarea id="messageToRead" disabled class="input">{{
+              messageFromChain
+            }}</textarea>
           </fieldset>
           <div class="buttonWrapper">
             <button
@@ -67,16 +76,19 @@
         </div>
       </div>
       <div class="helperSection">
-        <div class="card">
+        <div class="card noBackground">
           <h4 class="cardTitle">Resources</h4>
           <ul class="list">
             <li>
-              <a href="https://docs.kadena.io/" class="link">Find in-depth information about Kadena. &rarr;</a>
+              <a href="https://docs.kadena.io/" class="link"
+                >Find in-depth information about Kadena. &rarr;</a
+              >
             </li>
             <li>
-              <a class="link"
-                href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact">The
-                smart contract powering this page. &rarr;
+              <a
+                class="link"
+                href="https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app/pact"
+                >The smart contract powering this page. &rarr;
               </a>
             </li>
           </ul>

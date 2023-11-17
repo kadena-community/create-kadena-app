@@ -6,7 +6,9 @@ describe('App page', () => {
     render(App);
 
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading.textContent).toBe('Start Interacting with the Kadena Blockchain');
+    expect(heading.textContent).toBe(
+      'Start Interacting with the Kadena Blockchain',
+    );
   });
 
   it('should render blockchain interaction section', () => {
