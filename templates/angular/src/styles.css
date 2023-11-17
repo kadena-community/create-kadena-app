@@ -26,8 +26,9 @@ code {
   color: #fff;
   border: 1px solid #9EA1A6;
   border-radius: 2px;
-  padding: 8px;
+  padding: 0 8px;
   font-family:
+    'Kode Mono Bold',
     Menlo,
     Monaco,
     Lucida Console,
@@ -36,7 +37,8 @@ code {
     Bitstream Vera Sans Mono,
     Courier New,
     monospace;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 14px;
 }
 
 textarea {

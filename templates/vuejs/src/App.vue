@@ -45,8 +45,8 @@ export default {
         </p>
         <p class="note">
           Use the form below to interact with the Kadena blockchain using
-          <em><code>@kadena/client</code></em> and edit
-          <em><code>src/pages/index.tsx</code></em>to get started.
+          <code>@kadena/client</code> and edit
+          <code>src/pages/index.tsx</code> to get started.
         </p>
       </div>
     </section>
@@ -56,7 +56,7 @@ export default {
           <h4 class="cardTitle">Write to the blockchain</h4>
           <fieldset class="fieldset">
             <label for="account" class="fieldLabel">My Account</label>
-            <input id="account" v-model="account" placeholder="Please enter a valid k:account" class="input" />
+            <input id="account" v-model="account" placeholder="Please enter a valid k:account" class="input codeFont" />
           </fieldset>
           <fieldset class="fieldset">
             <label for="write-message" class="fieldLabel">Write Message</label>
@@ -132,7 +132,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 768px;
   text-align: center;
   gap: 24px;
 }
@@ -211,14 +211,26 @@ export default {
 
 .fieldLabel {
   color: #080708;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   display: flex;
 }
 
 .input {
+  font-family: 'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
   border: 0;
   outline: 0;
   display: flex;
@@ -238,6 +250,10 @@ export default {
   line-height: normal;
   box-shadow: 0px 1px 0 0 #cacbce;
   flex-grow: 1;
+}
+
+.codeFont {
+  font-family: 'Kode Mono', monospace;
 }
 
 .buttonWrapper {

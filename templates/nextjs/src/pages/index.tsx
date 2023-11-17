@@ -69,13 +69,9 @@ const Home: React.FC = (): JSX.Element => {
             </p>
             <p className={styles.note}>
               Use the form below to interact with the Kadena blockchain using{' '}
-              <em>
-                <code>@kadena/client</code>
-              </em>{' '}
+              <code>@kadena/client</code>{' '}
               and edit{' '}
-              <em>
-                <code>src/pages/index.tsx</code>
-              </em>{' '}
+              <code>src/pages/index.tsx</code>{' '}
               to get started.
             </p>
           </div>
@@ -93,7 +89,7 @@ const Home: React.FC = (): JSX.Element => {
                   onChange={handleAccountInputChange}
                   value={account}
                   placeholder="Please enter a valid k:account"
-                  className={styles.input}
+                  className={`${styles.input} ${styles.codeFont}`}
                 ></input>
               </fieldset>
               <fieldset className={styles.fieldset}>
