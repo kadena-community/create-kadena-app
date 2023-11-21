@@ -17,8 +17,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": [".kadena/pactjs-generated"]
+    "types": [".kadena/pactjs-generated", "node", "jest"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "jest.setup.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

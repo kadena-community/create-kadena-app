@@ -1,4 +1,5 @@
-import { Command } from 'commander';
+import chalk from 'chalk';
+import type { Command } from 'commander';
 import spawn from 'cross-spawn';
 import {
   copyFileSync,
@@ -10,6 +11,8 @@ import {
   writeFileSync,
 } from 'fs';
 import { join } from 'path';
+
+const log = console.log;
 
 type ProjectTemplate = 'nextjs' | 'vuejs' | 'angular';
 
@@ -37,7 +40,7 @@ const isValidProjectName = (name: string): boolean => {
 };
 
 const copyFolderSync = (from: string, to: string): void => {
-  mkdirSync(to);
+  if (!existsSync(to)) mkdirSync(to);
   readdirSync(from).forEach((element) => {
     if (COPY_IGNORE_LIST.includes(element)) {
       return;
@@ -77,8 +80,10 @@ const generate =
     executionPath: string,
   ): ((args: IGenerateProjectOptions) => void) =>
   (args: IGenerateProjectOptions) => {
-    console.log(
-      `Generating @kadena/client integrated starter project with ${args.template} template`,
+    log(
+      chalk.blue(
+        `Generating @kadena/client integrated starter project with ${args.template} template`,
+      ),
     );
 
     const templateSourceDirectory: string = join(
@@ -96,22 +101,31 @@ const generate =
     }
 
     // Copy template contents to target directory
-    console.log(`Creating project at ${targetDirectory}`);
+    log(chalk.blue(`Creating project at ${targetDirectory}`));
     copyFolderSync(templateSourceDirectory, targetDirectory);
 
     // Copy Pact smart contracts to target directory
-    console.log('Creating smart contract ...');
+    log(chalk.blue('Creating smart contract ...'));
     copyFolderSync(pactSourceDirectory, join(targetDirectory, 'pact'));
+    log(chalk.green('Smart contract created successfully!'));
 
     // Copy README.MD to target directory
-    console.log('Copying generic documentation ...');
+    log(chalk.blue('Copying generic documentation ...'));
     copyFileSync(
       join(executionPath, 'templates/README.md'),
       join(targetDirectory, 'README.md'),
     );
+    log(chalk.green('Documentation copied successfully!'));
+
+    log(chalk.blue('Copying common client utils code ...'));
+    copyFolderSync(
+      join(templateSourceDirectory, '../common/utils'),
+      join(targetDirectory, 'src/utils'),
+    );
+    log(chalk.green('Common client utils copied successfully!'));
 
     // Update package.json
-    console.log('Updating package.json ...');
+    log(chalk.blue('Updating and formatting package.json ...'));
     const targetPackageJsonPath: string = join(targetDirectory, 'package.json');
     const targetPackageJson = JSON.parse(
       readFileSync(targetPackageJsonPath, 'utf8'),
@@ -119,28 +133,37 @@ const generate =
 
     writeFileSync(
       targetPackageJsonPath,
-      JSON.stringify({
-        ...targetPackageJson,
-        ...{
-          name: args.name,
-          version,
+      JSON.stringify(
+        {
+          ...targetPackageJson,
+          ...{
+            name: args.name,
+            version,
+          },
         },
-      }),
+        null,
+        2,
+      ),
     );
+    log(chalk.green('package.json updated and formatted successfully!'));
 
     // Installing dependencies
-    console.log('Installing dependencies ...');
-    executeCommand('npm', ['install', '--loglevel=error'], {
+    log(chalk.blue.italic('Installing dependencies ...'));
+    executeCommand('pnpm', ['install', '--loglevel=error'], {
       cwd: targetDirectory,
     });
 
     // Generating Pact types for demo contract
-    console.log('Generating types for Pact smart contract');
-    executeCommand('npm', ['run', 'pactjs:generate:contracts'], {
+    log(chalk.magenta('Generating types for Pact smart contract'));
+    executeCommand('pnpm', ['run', 'pactjs:generate:contracts'], {
       cwd: targetDirectory,
     });
 
-    console.log(`Project created successfully!`);
+    executeCommand('pnpm', ['run', 'format'], {
+      cwd: targetDirectory,
+    });
+
+    log(chalk.green.bold(`Project created successfully!`));
   };
 
 export function projectGenerateCommand(

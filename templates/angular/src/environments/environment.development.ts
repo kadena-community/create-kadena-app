@@ -1,7 +1,7 @@
-import { ChainId, ChainwebNetworkId } from '@kadena/types';
+import { ChainId, NetworkId } from '@kadena/types';
 
 export const environment: {
-  kadenaNetworkId: ChainwebNetworkId;
+  kadenaNetworkId: NetworkId;
   kadenaChainId: ChainId;
   kadenaHost: string;
 } = {
