@@ -88,5 +88,7 @@ packages/*/*/temp
 
 test-*/*
 
+# Ignore sample tests app folders
+sample-*
 *-app
 *-app*

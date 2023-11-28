@@ -27,6 +27,12 @@ const SUPPORTED_PROJECT_TEMPLATES: Array<ProjectTemplate> = [
   'angular',
 ];
 
+const COPY_FONTS_MAP: Record<ProjectTemplate, string> = {
+  nextjs: 'src/styles/fonts',
+  vuejs: 'src/assets/fonts',
+  angular: 'src/assets/fonts',
+};
+
 const COPY_IGNORE_LIST: Array<string> = [
   '.next',
   'node_modules',
@@ -123,6 +129,13 @@ const generate =
       join(targetDirectory, 'src/utils'),
     );
     log(chalk.green('Common client utils copied successfully!'));
+
+    log(chalk.blue('Copying fonts ...'));
+    copyFolderSync(
+      join(templateSourceDirectory, '../common/fonts'),
+      join(targetDirectory, COPY_FONTS_MAP[args.template]),
+    );
+    log(chalk.blue('Fonts copied successfully ...'));
 
     // Update package.json
     log(chalk.blue('Updating and formatting package.json ...'));
