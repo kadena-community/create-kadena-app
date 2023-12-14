@@ -37,8 +37,8 @@ choose from when starting a new project. The following project templates are
 currently available:
 
 - [Nextjs][3]
-- [Vuejs][4] - _(Under development, coming soon)_
-- [Angular][5] - _(Under development, coming soon)_
+- [Vuejs][4]
+- [Angular][5]
 
 ## Usage
 
@@ -50,7 +50,7 @@ npx @kadena/create-kadena-app
 
 Create Kadena app allows you to pass command line arguments to set up a new
 project non-interactively. While we might further expand functionality in the
-future currently there's one command availabe, `generate-project`. See
+future currently there's one command available, `generate-project`. See
 create-kadena-app generate --help:
 
 ```sh
@@ -100,7 +100,7 @@ which are shown below:
 ```
 
 Reading a message is unrestricted, so everyone can access the smart contract and
-read the message a user has written, given the acount is provided.
+read the message a user has written, given the account is provided.
 
 ```pact
 (defun write-message (account:string message:string)
