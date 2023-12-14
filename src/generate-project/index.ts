@@ -162,21 +162,21 @@ const generate =
 
     // Installing dependencies
     log(chalk.blue.italic('Installing dependencies ...'));
-    executeCommand('pnpm', ['install', '--loglevel=error'], {
+    executeCommand('npm', ['install', '--loglevel=error'], {
       cwd: targetDirectory,
     });
 
     // Generating Pact types for demo contract
     log(chalk.magenta('Generating types for Pact smart contract'));
-    executeCommand('pnpm', ['run', 'pactjs:generate:contracts'], {
+    executeCommand('npm', ['run', 'pactjs:generate:contracts'], {
       cwd: targetDirectory,
     });
 
-    executeCommand('pnpm', ['run', 'format'], {
+    executeCommand('npm', ['run', 'format'], {
       cwd: targetDirectory,
     });
 
-    log(chalk.green.bold(`Project created successfully!`));
+    log(chalk.green.bold(`${args.template} dapp created successfully!`));
   };
 
 export function projectGenerateCommand(
