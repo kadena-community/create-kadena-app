@@ -38,8 +38,8 @@
     "@angular-devkit/build-angular": "^17.0.0",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.2",
-    "@kadena/pactjs-cli": "~1.6.1",
-    "@kadena/types": "^0.5.2",
+    "@kadena/pactjs-cli": "~1.10.1",
+    "@kadena/types": "^0.6.1",
     "@types/jasmine": "~5.1.2",
     "@types/node": "^20.9.0",
     "jasmine-core": "~5.1.1",
@@ -52,7 +52,7 @@
     "prettier-eslint": "^16.1.2",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.4.6",
-    "typescript": "~5.2.2"
+    "typescript": "~5.4.4"
   }
 }
 
