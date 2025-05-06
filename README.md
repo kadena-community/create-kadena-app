@@ -1,3 +1,9 @@
+## ⚠️⚠️ DEPRECATION NOTICE ⚠️⚠️
+
+Create Kadena App has been moved to the [kadena.js](https://github.com/kadena-community/kadena.js/tree/main/packages/tools/create-kadena-app) monorepo.
+
+---
+
 <!-- genericHeader start -->
 
 # @kadena/create-kadena-app
